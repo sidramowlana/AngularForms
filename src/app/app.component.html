@@ -1,42 +1,94 @@
 <div class="container">
     <div class="row">
         <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-            <form>
-                <div id="user-data">
+            <form (ngSubmit)="onSubmit()" #form="ngForm">
+                <div id="user-data" ngModelGroup="userData" #userData="ngModelGroup">
                     <div class="form-group">
-                        <label for="username">User Name</label>
+                        <label for="usernameId">User Name</label>
                         <input
                             type="text" 
-                            id="username"
+                            id="usernameId"
                             class="form-control"
                             ngModel
-                            name="username">
+                            name="username"
+                            required>
                     </div>                            
-                    <button class="btn btn-default" type="button">Suggest a User name</button>
+                    <button class="btn btn-default" type="button" (click)="onSuggest()">Suggest a User name</button>
                     <div class="form-group">
-                        <label for="email">Email</label>
+                        <label for="emailId">Email</label>
                         <input
                             type="text"
-                            id="email"
+                            id="emailId"
                             class="form-control"
                             ngModel
-                            name="email">
+                            name="email"
+                            required
+                            email
+                            #emailRef="ngModel">
+                        <span 
+                            class="help-block" 
+                            *ngIf="!emailRef.valid && emailRef.touched">Please entet valid email!
+                        </span>
+                        <p class="help-block" *ngIf="!userData.valid && userData.touched">Invalid data</p>                
                     </div>
                 </div>
-
                 <div class="form-group">
-                    <label for="secret">Secret Question</label>
-                    <select 
-                        id="secret"
+                    <label for="secretId">Secret Question</label>
+                    <select sssss
+                        id="secretId"
                         class="form-control"
-                        ngModel
+                        [ngModel]="defaultQuestion"
                         name="secret">
                         <option value="pet">Your first pet?</option>
-                        <option value="teacher">Your favourite teacher</option>
+                        <option value="teacher">Your favourite teacher?</option>
+                        <option value="friend"> Your best friend?</option>
                     </select>
                 </div>
-                <button class="btn btn-primary" type="submit">Submit</button>
+                
+                <div class="form-group">
+                    <textarea
+                    name="questionAnswer"
+                    rows="3"
+                    [(ngModel)]="answer"
+                    ></textarea>
+                </div>
+                <p>Your reply: {{answer}}</p>
+
+                <label>Select your gender</label>
+              <div class="radio" *ngFor="let g of genders">
+                  <label>
+                      <input
+                        type="radio"
+                        ngModel
+                        name="gender"
+                        [value]="g"
+                        required>
+                        {{ g }}
+                  </label>
+              </div>
+                <button 
+                    class="btn btn-primary"
+                    type="submit"
+                    [disabled]="!form.valid">Submit</button>
+
+                    <button 
+                    class="btn btn-danger"
+                    type="button"
+                    (click)="onReset()"
+                    [disabled]="!form.valid">Reset</button>
             </form>
         </div>        
+    </div>
+    <hr>
+    <div class="row">
+        <div class="col-xs-12">
+            <h4>User Data</h4>
+            <p>User Name: {{user.userName}}</p>
+            <p>User Email: {{user.userEmail}}</p>
+            <p>Question:  {{user.secretQuestion}}</p>
+            <p>Answer:  {{user.answer}}</p>
+            <p>User gender: {{user.gender}}</p>
+           
+        </div>
     </div>
 </div>
