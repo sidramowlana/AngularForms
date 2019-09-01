@@ -11,6 +11,7 @@ export class AppComponent {
   @ViewChild('form') formRef:NgForm; //using view child since iam not passing the form varibale inside the method
   defaultQuestion = 'pet'; //it is a value available from the options
   answer ='';
+  // genderis ="male";
   genders = ['male','female','other'];
   user={
     userName:'',
@@ -37,6 +38,17 @@ export class AppComponent {
       }
     );
  
+    // this.formRef.setValue(
+    //   {
+    //     userData:{
+    //       username:"sidra",
+    //       email:"si@gmail.com"
+    //     },
+    //     secret:"friend",
+    //     questionAnswer:"luffy",
+    //     gender:"male"
+    //   }
+    // );
 
     //patch value
     // this.formRef.form.patchValue(

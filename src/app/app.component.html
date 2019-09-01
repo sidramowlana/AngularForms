@@ -57,7 +57,13 @@
                 <label>Select your gender</label>
               <div class="radio" *ngFor="let g of genders">
                   <label>
-                      <input
+                      <!-- <input
+                        type="radio"
+                        [ngModel]="genderis"
+                        name="gender"
+                        [value]="g"
+                        required> -->
+                        <input
                         type="radio"
                         ngModel
                         name="gender"
@@ -80,7 +86,7 @@
         </div>        
     </div>
     <hr>
-    <div class="row">
+    <div class="row" *ngIf="submitted">
         <div class="col-xs-12">
             <h4>User Data</h4>
             <p>User Name: {{user.userName}}</p>
